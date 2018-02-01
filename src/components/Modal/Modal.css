@@ -10,17 +10,53 @@
     top: 30%;
     left: 25%;
     width: 50%;
-    transition: all 1000ms ease-out;
+    /*transition: all 1000ms ease-out;*/
 }
 
 .ModalOpen {
     /*display: block;*/
-    opacity: 1;
-    transform: translateY(0);
+    /*opacity: 1;*/
+    /*transform: translateY(0);*/
+    animation: openModal .5s ease-out forwards;
 }
 
 .ModalClosed {
     /*display: none;*/
-    opacity: 0;
-    transform: translateY(-300%);
+    /*opacity: 0;*/
+    /*transform: translateY(-300%);*/
+    animation: closeModal .5s ease-out forwards;
+}
+
+@keyframes openModal {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(20%);
+    }
+
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes closeModal {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    50% {
+        opacity: .7;
+        transform: translateY(60%);
+    }
+
+    100%{
+        opacity: 0;
+        transform: translateY(-100%);
+    }
 }
