@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Transition from 'react-transition-group/Transition'
 
 import "./App.css";
 import Modal from "./components/Modal/Modal";
@@ -8,22 +9,47 @@ import List from "./components/List/List";
 class App extends Component {
   
   state = {
-    modalIsOpen: false
+    modalIsOpen: false,
+    showBlock: false
   }
   
   showModal = () => {
-    this.setState( { modalIsOpen: true } )
+    this.setState( { ...this.state, modalIsOpen: true } )
   }
   
   closeModal = () => {
-    this.setState( { modalIsOpen: false } )
+    this.setState( { ...this.state, modalIsOpen: false } )
+  }
+  
+  toggle = () => this.setState( prevState => ( { showBlock: !prevState.showBlock } ) )
+  
+  divStyle = state => {
+    return {
+      backgroundColor: "red",
+      width: 100,
+      height: 100,
+      margin: 'auto',
+      transition: 'opacity 1.5s',
+      opacity: state === 'exiting' ? 0 : ( state === 'entered' ? 1 : 0 )
+    }
   }
   
   render() {
     return (
       <div className="App">
         <h1>React Animations</h1>
-        <Modal closed={this.closeModal} show={this.state.modalIsOpen}/>
+        <button className="Button" onClick={this.toggle}>Toggle</button>
+        <br/><br/>
+        <Transition in={this.state.showBlock} timeout={1500} mountOnEnter unmountOnExit>
+          
+          {state =>
+            <div style={this.divStyle(state)}></div>}
+        </Transition>
+        
+        <Transition timeout={1000}>
+          {state => <Modal closed={this.closeModal} show={this.state.modalIsOpen}/>}
+        </Transition>
+        <br/>
         <Backdrop show={this.state.modalIsOpen}/>
         <button className="Button" onClick={this.showModal}>Open Modal</button>
         <h3>Animating Lists</h3>
