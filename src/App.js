@@ -40,15 +40,23 @@ class App extends Component {
         <h1>React Animations</h1>
         <button className="Button" onClick={this.toggle}>Toggle</button>
         <br/><br/>
-        <Transition in={this.state.showBlock} timeout={1500} mountOnEnter unmountOnExit>
-          
-          {state =>
-            <div style={this.divStyle(state)}></div>}
+        
+        <Transition in={this.state.showBlock} timeout={1500}
+                    mountOnEnter
+                    unmountOnExit
+        
+                    onEnter={() => console.log('onEnter')}
+                    onEntering={() => console.log('onEntering')}
+                    onEntered={() => console.log('onEntered')}
+                    onExit={() => console.log('onExit')}
+                    onExiting={() => console.log('onExiting')}
+                    onExited={() => console.log('onExited')}
+        >
+          {state => <div style={this.divStyle(state)}></div>}
         </Transition>
         
-        <Transition timeout={1000}>
-          {state => <Modal closed={this.closeModal} show={this.state.modalIsOpen}/>}
-        </Transition>
+        <Modal closed={this.closeModal} show={this.state.modalIsOpen}/>
+        
         <br/>
         <Backdrop show={this.state.modalIsOpen}/>
         <button className="Button" onClick={this.showModal}>Open Modal</button>
