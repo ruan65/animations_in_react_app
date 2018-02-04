@@ -10,8 +10,9 @@
     padding: 10px;
     box-sizing: border-box;
     width: 100%;
+    color: white;
     border: 1px solid #521751;
-    background-color: white;
+    background-color: brown;
     text-align: center;
     cursor: pointer;
 }
@@ -19,4 +20,22 @@
 .ListItem:hover,
 .ListItem:active {
     background-color: #ccc;
+}
+
+.fade-enter {
+    opacity: 0;
+}
+
+.fade-enter-active {
+    opacity: 1;
+    transition: opacity 1s ease-out;
+}
+
+.fade-exit {
+    opacity: 1;
+}
+
+.fade-exit-active {
+    opacity: 0;
+    transition: opacity 1s ease-out;
 }
